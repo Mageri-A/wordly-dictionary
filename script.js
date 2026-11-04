@@ -18,8 +18,6 @@ const themeToggle = document.getElementById("theme-toggle");
 let currentWord = "";
 let currentAudio = null;
 let savedWords = loadSaved();
-
-/* ---------- Storage helpers ---------- */
 function loadSaved() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEYS.saved)) || [];
@@ -31,8 +29,6 @@ function loadSaved() {
 function persistSaved() {
   localStorage.setItem(STORAGE_KEYS.saved, JSON.stringify(savedWords));
 }
-
-/* ---------- Messages ---------- */
 function showMessage(text, isError = false) {
   message.textContent = text;
   message.classList.toggle("error", isError);
@@ -43,8 +39,6 @@ function clearMessage() {
   message.hidden = true;
   message.textContent = "";
 }
-
-/* ---------- Fetch ---------- */
 async function fetchWord(word, rextries = 2) {
     try {
         const response = await fetch(API_URL + encodeURIComponent(word));
@@ -64,7 +58,6 @@ async function fetchWord(word, rextries = 2) {
     }
 }
 
-/* ---------- Parsing ---------- */
 function getPhonetic(entry) {
   if (entry.phonetic) return entry.phonetic;
   const withText = (entry.phonetics || []).find((p) => p.text);
@@ -77,7 +70,6 @@ function getAudioUrl(entry) {
   return withAudio.audio.startsWith("//") ? "https:" + withAudio.audio : withAudio.audio;
 }
 
-/* ---------- Rendering ---------- */
 function renderMeanings(meanings) {
   meaningsEl.replaceChildren();
 
@@ -129,8 +121,6 @@ function renderEntry(entry) {
   card.hidden = false;
   updateSaveState();
 }
-
-/* ---------- Saved words ---------- */
 function updateSaveState() {
   const isSaved = savedWords.includes(currentWord);
   card.classList.toggle("is-saved", isSaved);
@@ -169,8 +159,6 @@ function toggleSave() {
   renderSaved();
   updateSaveState();
 }
-
-/* ---------- Search flow ---------- */
 async function searchWord(rawWord) {
   const word = rawWord.trim();
   clearMessage();
@@ -201,14 +189,12 @@ async function searchWord(rawWord) {
   }
 }
 
-/* ---------- Theme ---------- */
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeToggle.textContent = theme === "dark" ? "Light theme" : "Dark theme";
   localStorage.setItem(STORAGE_KEYS.theme, theme);
 }
 
-/* ---------- Event listeners ---------- */
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   searchWord(input.value);
@@ -228,6 +214,5 @@ themeToggle.addEventListener("click", () => {
   applyTheme(next);
 });
 
-/* ---------- Init ---------- */
 applyTheme(localStorage.getItem(STORAGE_KEYS.theme) || "light");
 renderSaved();
