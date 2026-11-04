@@ -1,0 +1,121 @@
+:root {
+  --bg: #eef3f8;
+  --surface: #ffffff;
+  --ink: #12263f;
+  --muted: #5b6b7f;
+  --accent: #0b6e8a;
+  --accent-ink: #ffffff;
+  --saved: #ffd966;
+  --error-bg: #fde8e8;
+  --error-ink: #8a1c1c;
+  --border: #d3dde8;
+}
+
+[data-theme="dark"] {
+  --bg: #0d1a2b;
+  --surface: #16273d;
+  --ink: #e8eef6;
+  --muted: #9db0c6;
+  --accent: #5cc2de;
+  --accent-ink: #0d1a2b;
+  --saved: #b8902a;
+  --error-bg: #4a1f24;
+  --error-ink: #ffc9c9;
+  --border: #2c4260;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; margin: 0; }
+h1 { font-size: 2rem; }
+
+main, .site-header, .site-footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-header { display: flex; justify-content: space-between; align-items: center; }
+.site-footer { color: var(--muted); font-size: 0.85rem; text-align: center; font-style: italic;}
+.footer-box { border: 1px solid var( --border); background: var(--surface); border-radius: 8px; padding: 0.8rem 1 rem;}
+.footer-box p { margin: 0.25rem 0; }
+.tagline { font-size: 1rem; color: var(--muted); margin: 0.25rem 0 0; font-style:italic}
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  transition: transform 0.15s, background 0.15s, color 0.15s;
+}
+button:hover { background: var(--accent); color: var(--accent-ink); transform: translateY(-1px); }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--saved); outline-offset: 2px; }
+
+#search-form { display: flex; gap: 0.5rem; }
+#search-form input {
+  flex: 1;
+  font: inherit;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+}
+#search-form button { background: var(--accent); color: var(--accent-ink); }
+
+.message { margin: 1rem 0; padding: 0.8rem 1rem; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); }
+.message.error { background: var(--error-bg); color: var(--error-ink); border-color: transparent; }
+.message[hidden], [hidden] { display: none !important; }
+
+.word-card {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.word-card.is-saved { border-left: 8px solid var(--saved); }
+.word-card.is-saved #word-title { background: linear-gradient(transparent 60%, var(--saved) 60%); display: inline; }
+
+.word-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.word-actions { display: flex; gap: 0.5rem; align-items: flex-start; }
+#word-title { font-size: 2rem; }
+.phonetic, .muted { color: var(--muted); margin: 0.25rem 0 0; }
+
+.meaning { margin-top: 1.25rem; }
+.meaning h3 { font-style: italic; font-size: 1.15rem; color: var(--accent); }
+.meaning ol { padding-left: 1.25rem; margin: 0.5rem 0; }
+.meaning li { margin-bottom: 0.6rem; }
+.example { color: var(--muted); margin: 0.2rem 0 0; }
+.synonyms { margin: 0.5rem 0 0; color: var(--muted); }
+
+#saved-section { margin-top: 2rem; }
+#saved-section h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.chip-list { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; }
+.chip { display: inline-flex; background: var(--saved); color: #12263f; border-radius: 999px; overflow: hidden; }
+.chip button { border: 0; border-radius: 0; color: inherit; padding: 0.35rem 0.8rem; }
+.chip button:hover { background: rgba(0, 0, 0, 0.15); color: inherit; transform: none; }
+
+@media (max-width: 480px) {
+  #search-form { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

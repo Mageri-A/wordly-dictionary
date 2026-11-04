@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wordly Dictionary</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div>
+    <h1>WORDLY DICTIONARY</h1>
+    <p class="tagline">Discover word meanings, pronunciations and synonyms</p>
+    </div>
+    <button id="theme-toggle" type="button" aria-label="Switch between light and dark theme">Dark theme</button>
+  </header>
+
+  <main>
+    <form id="search-form" role="search" aria-label="Dictionary search" novalidate>
+      <label for="search-input" class="visually-hidden">Type a word to look up</label>
+      <input id="search-input" type="search" placeholder="Look up a word, e.g. perfect" autocomplete="off" required>
+      <button type="submit" aria-label="Search for the word">Search</button>
+    </form>
+
+    <p id="message" class="message" role="status" aria-live="polite" hidden></p>
+
+    <section id="results" aria-label="Search results" aria-live="polite">
+      <article id="word-card" class="word-card" hidden>
+        <div class="word-head">
+          <div>
+            <h2 id="word-title"></h2>
+            <p id="word-phonetic" class="phonetic"></p>
+          </div>
+          <div class="word-actions">
+            <button id="audio-btn" type="button" aria-label="Play pronunciation" hidden>Play audio</button>
+            <button id="save-btn" type="button" aria-pressed="false" aria-label="Save this word">Save word</button>
+          </div>
+        </div>
+        <p id="audio-fallback" class="muted" hidden>No audio available for this word.</p>
+        <div id="meanings"></div>
+      </article>
+    </section>
+
+    <section id="saved-section" aria-label="Saved words">
+      <h2>Saved words</h2>
+      <p id="saved-empty" class="muted">No saved words yet. Search for a word and select Save word.</p>
+      <ul id="saved-list" class="chip-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-box">
+    <p>Definitions from the Free DictionaryAPI.</p>
+    <p>By Allan Mageri</p>
+    </div>
+  </footer>
+</body>
+</html>
